@@ -1,10 +1,41 @@
-<h2>Card component HTML</h2>
-<p>
-  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi aperiam cupiditate dolores earum eligendi enim id
-  labore laboriosam libero, nisi nostrum, nulla obcaecati quasi ratione repellendus sapiente vero? Ab accusamus aliquam
-  aliquid aspernatur blanditiis consequatur cumque cupiditate dolor dolorum earum eius eligendi enim est ex excepturi
-  fugit harum hic illum ipsam ipsum laudantium maxime nihil nulla odit optio possimus praesentium qui quibusdam sit
-  tempora, totam ut voluptas voluptate! Animi debitis fugit in iste maxime! Aliquam architecto blanditiis dicta dolorum
-  enim error esse ex fugiat harum iure mollitia necessitatibus nihil quae qui quia quidem quod recusandae repellat sit
-  temporibus unde, voluptatem?
-</p>
+<div class="card">
+  <h2 [ngStyle]="{
+  color: card.title.length < 5 ? 'blue' : 'red',
+  fontWeight: card.title.length < 7 ? 'normal' : 'bold'
+  }">{{index}}{{card.title}}</h2>
+
+  <!--  <p class="text" [ngClass]="{-->
+  <!--  blue: textColor === 'blue',-->
+  <!--  green: textColor === 'green',-->
+  <!--  red: textColor === 'red'-->
+  <!--  }">{{text}}</p>-->
+
+  <p class="text"
+     [class.blue]="textColor === 'blue'"
+     [class.red]="textColor === 'red'"
+     [class.green]="textColor === 'green'"
+  >{{card.text}}</p>
+
+  <div class="buttons">
+    <button (click)="textColor = 'blue'">Set Blue</button>
+    <button (click)="textColor = 'green'">Set Green</button>
+    <button (click)="textColor = 'red'">Set Red</button>
+  </div>
+
+  <div class="buttons">
+    <button (click)="changeTitle()">Change title</button>
+    <button (click)="card.title = 'Inline title'">Change title inline</button>
+  </div>
+
+  <div>
+    <strong>{{cardDate | date:'dd MMMM yyyy HH:mm:ss'}}</strong>
+  </div>
+
+  <!--  <div>-->
+  <!--    <input type="text" #myInput (input)="inputHandler(myInput.value)" [value]="title">-->
+  <!--  </div>-->
+
+  <div>
+    <input type="text" [(ngModel)]="card.title" (ngModelChange)="changeHandler()">
+  </div>
+</div>
